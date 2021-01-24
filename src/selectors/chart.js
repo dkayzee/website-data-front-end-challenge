@@ -2,7 +2,7 @@ import { createSelector } from "reselect";
 import _ from "underscore";
 import { getSelectedLanguages } from "./language";
 
-const selectData = state => state.chart.data;
+const selectData = (state) => state.chart.data;
 
 /**
  * Group total websites views by language.
@@ -20,7 +20,36 @@ export const groupByLanguage = createSelector(
   [selectData, getSelectedLanguages],
   (data, languages) => {
     // TODO: Implement
-    return;
+
+    // filter through the data to only retreive selected language websites
+    const filteredData = data.filter(
+      (website) =>
+        website.tags.filter((tag) =>
+          languages.map((lang) => lang.name).includes(tag.name)
+        ).length > 0
+    );
+
+    // object to store all the counts of views by language;
+    const viewCountByLang = {};
+    // for each website, reduce all the views into an accumulated value *AND* add the view count to EACH language type. In the example only has one language each, but this will add counts to multiple languages, as needed.
+    filteredData.map((website) => {
+      const temp = website.website_views.reduce((acc, views) => {
+        return acc + Number(views.count);
+      }, 0);
+
+      website.tags.map((lang) => {
+        if (viewCountByLang[lang.name]) viewCountByLang[lang.name] += temp;
+        else viewCountByLang[lang.name] = temp;
+        return viewCountByLang;
+      });
+      return viewCountByLang;
+    });
+
+    // transform the object into the desired param
+    return Object.keys(viewCountByLang).map((lang) => ({
+      views: viewCountByLang[lang],
+      language: lang,
+    }));
   }
 );
 
@@ -47,17 +76,17 @@ export const flattenWebsiteViews = createSelector(
     return _.flatten(
       data
         .filter(
-          website =>
-            website.tags.filter(tag =>
-              languages.map(lang => lang.name).includes(tag.name)
+          (website) =>
+            website.tags.filter((tag) =>
+              languages.map((lang) => lang.name).includes(tag.name)
             ).length > 0
         )
-        .map(website =>
-          website.website_views.map(views => {
+        .map((website) =>
+          website.website_views.map((views) => {
             return {
               count: views.count,
               date: views.date,
-              website: website.url
+              website: website.url,
             };
           })
         )

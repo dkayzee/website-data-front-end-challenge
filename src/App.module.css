@@ -4,8 +4,13 @@
 
 /* TODO */
 .time_series__header {
+  display: flex;
+  justify-content: center;
+  padding: 25px;
 }
 
 /* TODO */
 .time_series__chart_row {
+  display: flex;
+  justify-content: space-evenly;
 }

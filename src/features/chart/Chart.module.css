@@ -18,8 +18,10 @@
 
 /* TODO */
 .header__text {
+  text-align: center;
 }
 
 /* TODO */
 .header__label {
+  padding: 0 4px;
 }
