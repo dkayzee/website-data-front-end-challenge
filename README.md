@@ -55,3 +55,10 @@ If you're unsure where to look, just `grep` for `TODO`.
 You may not need this information, but for your reference, here is the [API
 specification](api-spec.md) for the server this application communicates with.
 The API is hosted at http://a64e87478b2e0426091e5939c97440e3-254114657.us-east-1.elb.amazonaws.com.
+
+
+add a component that lets us see numbers of views on all currently selected websites for a particular date
+
+change the date. => open for discussion
+
+dropDown => Total Views By Date: {theTotal}

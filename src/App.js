@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./App.module.css";
+import { TotalViewsDisplay } from "./features/dataDisplay/TotalViewsDisplay";
 import { BarChart } from "./features/chart/bar/BarChart";
 import { LineChart } from "./features/chart/line/LineChart";
 import { Languages } from "./features/language/Languages";
@@ -20,6 +21,7 @@ function App() {
       <div className={styles.time_series__chart_row}>
         <BarChart />
         <LineChart />
+        <TotalViewsDisplay />
       </div>
     </div>
   );
