@@ -15,7 +15,7 @@
     "react-vega": "^7.4.1",
     "reselect": "^4.0.0",
     "underscore": "^1.11.0",
-    "vega": "^5.17.0",
+    "vega": "^5.33.0",
     "vega-lite": "^4.17.0"
   },
   "scripts": {
